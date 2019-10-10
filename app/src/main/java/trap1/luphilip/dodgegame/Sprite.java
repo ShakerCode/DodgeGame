@@ -22,7 +22,8 @@ public class Sprite extends RectF {
         }
 
         public Sprite() {
-            super(0,0, DrawView.getGridSpacing(), DrawView.getGridSpacing());
+//            super(0,0, DrawView.getGridSpacing(), DrawView.getGridSpacing());
+//            super(0,0,250,250);
             this.dx = 50;
             this.dy = 50;
             this.paint = new Paint();

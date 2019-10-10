@@ -14,7 +14,7 @@ public class DrawView extends View {
     Sprite ball = new Sprite();
     Paint paint = new Paint();
     public static int gridSpacing = 0;
-
+    int x = 0; int y = 0;
     public DrawView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
@@ -43,8 +43,7 @@ public class DrawView extends View {
         }
 
 
-
-//        ball.setCoordinates();
+        ball.setCoordinates(x, y, gridSpacing, gridSpacing);
         ball.drawBall(canvas);
         invalidate();
     }
