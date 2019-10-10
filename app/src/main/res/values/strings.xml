@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DodgeGame</string>
+    <string name="UP">UP</string>
+    <string name="DOWN">DOWN</string>
+    <string name="LEFT">LEFT</string>
+    <string name="RIGHT">RIGHT</string>
+</resources>
