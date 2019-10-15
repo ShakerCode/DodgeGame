@@ -9,6 +9,8 @@ public class Sprite extends RectF {
 
         private int dx;
         private int dy;
+        private int horBound;
+        private int vertBound;
         private Paint paint;
         DrawView drawView;
 
@@ -31,22 +33,67 @@ public class Sprite extends RectF {
         }
 
         public void drawBall(Canvas canvas) {
-            canvas.drawCircle(centerX(), centerY(), width()/2, this.paint);
+                canvas.drawCircle(centerX(), centerY(), width() / 2, this.paint);
         }
+
+        public void projUpdate(Canvas canvas) {
+            drawBall(canvas);
+            offset(dx, dy);
+            if(right + dx >= canvas.getWidth()) {
+
+            }
+            if(left + dx <= width()/2 ) {
+
+            }
+            if(top + dy >= canvas.getHeight() - width()/2) {
+
+            }
+            if(bottom + dx >= width()/2) {
+
+            }
+        }
+
         public void moveRight() {
-            offset(dx, 0);
+            if(right < horBound) {
+                offset(dx, 0);
+            }
         }
         public void moveLeft() {
-            offset(-dx,0);
+            if(left > 0) {
+                offset(-dx, 0);
+            }
         }
         public void moveUp() {
-            offset(0, -dy);
+            if(top > 0) {
+                offset(0, -dy);
+            }
         }
         public void moveDown() {
-            offset(0,dy);
+            if(bottom < vertBound) {
+                offset(0, dy);
+            }
         }
+
+
+
+
 
         public void setCoordinates(int leftX, int topY, int rightX, int bottomY) {
             left = leftX; top = topY; right = rightX; bottom = bottomY;
         }
+
+        public void setdx(int newdx) {
+            this.dx = newdx;
+        }
+
+        public void setdy(int newdy) {
+            this.dy = newdy;
+        }
+        public void setHorBound(int newHorBound) {
+            this.horBound = newHorBound;
+        }
+        public void setVertBound(int newVertBound) {
+            this.vertBound = newVertBound;
+        }
+
 }

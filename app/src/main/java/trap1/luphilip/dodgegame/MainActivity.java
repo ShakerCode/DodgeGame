@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
                 drawView.moveLeft();
             }
         });
-
         moveRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
