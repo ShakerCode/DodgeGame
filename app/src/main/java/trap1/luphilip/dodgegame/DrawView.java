@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class DrawView extends View {
     Sprite ball = new Sprite();
+    Sprite checker = new Sprite();
     Paint paint = new Paint();
     Paint barpaint = new Paint();
     ArrayList<Bar> bars = new ArrayList<Bar>();
@@ -39,7 +40,7 @@ public class DrawView extends View {
         gridSpacing = Math.min(width, height) / gridSize;
         boardSize = gridSize * gridSpacing;
 
-        canvas.drawCircle(gridSpacing * 3, boardSize + 175, 100, paint);
+//        canvas.drawCircle(gridSpacing * 3, boardSize + 175, 100, paint);
 
         //Horizontal
         for(int i = 0; i < gridSize + 1; i++) {
@@ -52,19 +53,19 @@ public class DrawView extends View {
         }
 
         //Bars
-
         for(Bar b: bars) {
             b.drawBars(canvas);
         }
 
         if(first) {
+            checker.setCoordinates(gridSpacing * 3, boardSize + 175, gridSpacing * 3, boardSize + 275);
             ball.setCoordinates(x, y, gridSpacing, gridSpacing);
             addBars();
-//            System.out.println(boardSize);
             ball.setHorBound(boardSize);
             ball.setVertBound(boardSize);
             first = false;
         }
+        checker.drawBall(canvas);
         ball.drawBall(canvas);
         invalidate();
     }

@@ -37,20 +37,6 @@ public class Sprite extends RectF {
                 canvas.drawCircle(centerX(), centerY(), width() / 2, this.paint);
         }
 
-        public void drawBars(Canvas canvas) {
-            Paint barpaint = new Paint();
-            for(int i = 1; i < DrawView.getGridSize(); i++) {
-                if(i % 2 == 0) {
-                    barpaint.setColor(Color.BLACK);
-                }
-                else {
-                    barpaint.setColor(Color.WHITE);
-                }
-                canvas.drawLine(i * DrawView.getGridSpacing(), DrawView.getBoardSize() + 100,
-                        i * DrawView.getGridSpacing(), DrawView.getBoardSize() + DrawView.getGridSpacing(), barpaint);
-                }
-        }
-
 
 //        public void projUpdate(Canvas canvas) {
 //            drawBall(canvas);
