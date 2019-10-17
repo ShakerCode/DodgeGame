@@ -9,12 +9,19 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 
 public class DrawView extends View {
-    private boolean first = true;
     Sprite ball = new Sprite();
     Paint paint = new Paint();
-    public static int gridSpacing = 0;
+    Paint barpaint = new Paint();
+    ArrayList<Bar> bars = new ArrayList<Bar>();
+
+    private boolean first = true;
+    private static int gridSize = 0;
+    private static int boardSize = 0;
+    private static int gridSpacing = 0;
     int x = 0; int y = 0;
     public DrawView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -23,23 +30,16 @@ public class DrawView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        paint.setColor(Color.GRAY);
-        paint.setStrokeWidth(8);
 
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(8);
         int height = getHeight();
         int width = getWidth();
-        int gridSize = 6;
+        gridSize = 6;
         gridSpacing = Math.min(width, height) / gridSize;
-        int boardSize = gridSize * gridSpacing;
+        boardSize = gridSize * gridSpacing;
 
-        if(first) {
-            ball.setCoordinates(x, y, gridSpacing, gridSpacing);
-            ball.setdx(gridSpacing);
-            ball.setdy(gridSpacing);
-            ball.setHorBound(boardSize);
-            ball.setVertBound(boardSize);
-            first = false;
-        }
+        canvas.drawCircle(gridSpacing * 3, boardSize + 175, 100, paint);
 
         //Horizontal
         for(int i = 0; i < gridSize + 1; i++) {
@@ -51,6 +51,20 @@ public class DrawView extends View {
             canvas.drawLine(i * gridSpacing, 0, i * gridSpacing, boardSize, paint);
         }
 
+        //Bars
+
+        for(Bar b: bars) {
+            b.drawBars(canvas);
+        }
+
+        if(first) {
+            ball.setCoordinates(x, y, gridSpacing, gridSpacing);
+            addBars();
+//            System.out.println(boardSize);
+            ball.setHorBound(boardSize);
+            ball.setVertBound(boardSize);
+            first = false;
+        }
         ball.drawBall(canvas);
         invalidate();
     }
@@ -68,8 +82,23 @@ public class DrawView extends View {
         ball.moveDown();
     }
 
+    public void addBars() {
+        for(int i = 0; i < gridSize; i++) {
+            bars.add(new Bar(i * gridSpacing, boardSize + 90, gridSpacing ));
+        }
+    }
+
+
     public static int getGridSpacing() {
         return gridSpacing;
+    }
+
+    public static int getBoardSize() {
+        return boardSize;
+    }
+
+    public static int getGridSize() {
+        return gridSize;
     }
 
 

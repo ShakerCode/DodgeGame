@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.drawable.DrawableWrapper;
 
 public class Sprite extends RectF {
 
@@ -26,8 +27,8 @@ public class Sprite extends RectF {
         public Sprite() {
 //            super(0,0, DrawView.getGridSpacing(), DrawView.getGridSpacing());
 //            super(0,0,250,250);
-            this.dx = 50;
-            this.dy = 50;
+            this.dx = 20;
+            this.dy = 20;
             this.paint = new Paint();
             this.paint.setColor(Color.BLUE);
         }
@@ -36,41 +37,56 @@ public class Sprite extends RectF {
                 canvas.drawCircle(centerX(), centerY(), width() / 2, this.paint);
         }
 
-        public void projUpdate(Canvas canvas) {
-            drawBall(canvas);
-            offset(dx, dy);
-            if(right + dx >= canvas.getWidth()) {
-
-            }
-            if(left + dx <= width()/2 ) {
-
-            }
-            if(top + dy >= canvas.getHeight() - width()/2) {
-
-            }
-            if(bottom + dx >= width()/2) {
-
-            }
+        public void drawBars(Canvas canvas) {
+            Paint barpaint = new Paint();
+            for(int i = 1; i < DrawView.getGridSize(); i++) {
+                if(i % 2 == 0) {
+                    barpaint.setColor(Color.BLACK);
+                }
+                else {
+                    barpaint.setColor(Color.WHITE);
+                }
+                canvas.drawLine(i * DrawView.getGridSpacing(), DrawView.getBoardSize() + 100,
+                        i * DrawView.getGridSpacing(), DrawView.getBoardSize() + DrawView.getGridSpacing(), barpaint);
+                }
         }
+
+
+//        public void projUpdate(Canvas canvas) {
+//            drawBall(canvas);
+//            offset(dx, dy);
+//            if(right + dx >= canvas.getWidth()) {
+//
+//            }
+//            if(left + dx <= width()/2 ) {
+//
+//            }
+//            if(top + dy >= canvas.getHeight() - width()/2) {
+//
+//            }
+//            if(bottom + dx >= width()/2) {
+//
+//            }
+//        }
 
         public void moveRight() {
             if(right < horBound) {
-                offset(dx, 0);
+                offset(DrawView.getGridSpacing(), 0);
             }
         }
         public void moveLeft() {
             if(left > 0) {
-                offset(-dx, 0);
+                offset(-DrawView.getGridSpacing(), 0);
             }
         }
         public void moveUp() {
             if(top > 0) {
-                offset(0, -dy);
+                offset(0, -DrawView.getGridSpacing());
             }
         }
         public void moveDown() {
             if(bottom < vertBound) {
-                offset(0, dy);
+                offset(0, DrawView.getGridSpacing());
             }
         }
 

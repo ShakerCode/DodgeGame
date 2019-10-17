@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         moveDown = findViewById(R.id.DOWN);
         drawView = findViewById(R.id.drawView);
 
+//        drawView.addBars();
+
         moveLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
