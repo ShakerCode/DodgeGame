@@ -12,14 +12,14 @@ public class Bar extends RectF {
     private int dx;
     private Paint barpaint = new Paint();
 
-    public Bar(int x1, int y1, int length1) {
+    public Bar(int x1, int y1, int length1, int color) {
         super(x1, y1, x1, y1 + length1);
-        this.dx = -10;
-        barpaint.setColor(Color.WHITE);
+        this.dx = -3;
+        barpaint.setColor(color);
         barpaint.setStrokeWidth(8);
     }
 
-    public void drawBars(Canvas canvas) {
+    public void drawBars(Canvas canvas, Sprite checker) {
         canvas.drawLine(left, bottom, right, top, barpaint);
         offset(dx, 0);
         if(left <= 0) {

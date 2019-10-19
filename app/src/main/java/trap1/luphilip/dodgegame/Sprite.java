@@ -12,72 +12,65 @@ public class Sprite extends RectF {
         private int dy;
         private int horBound;
         private int vertBound;
-        private Paint paint;
-        DrawView drawView;
+        private Paint paint = new Paint();
+//        private boolean canMove;
 
         public Sprite(int left, int top, int right, int bottom) {
             super(left, top, right, bottom);
             this.dx = 50;
             this.dy = 50;
-            this.paint = new Paint();
             this.paint.setColor(Color.BLUE);
 
         }
 
-        public Sprite() {
+        public Sprite(int c) {
 //            super(0,0, DrawView.getGridSpacing(), DrawView.getGridSpacing());
 //            super(0,0,250,250);
             this.dx = 20;
             this.dy = 20;
-            this.paint = new Paint();
-            this.paint.setColor(Color.BLUE);
+            this.paint.setColor(c);
         }
 
         public void drawBall(Canvas canvas) {
                 canvas.drawCircle(centerX(), centerY(), width() / 2, this.paint);
         }
 
-
-//        public void projUpdate(Canvas canvas) {
-//            drawBall(canvas);
-//            offset(dx, dy);
-//            if(right + dx >= canvas.getWidth()) {
-//
-//            }
-//            if(left + dx <= width()/2 ) {
-//
-//            }
-//            if(top + dy >= canvas.getHeight() - width()/2) {
-//
-//            }
-//            if(bottom + dx >= width()/2) {
-//
-//            }
-//        }
-
-        public void moveRight() {
+        public int moveRight() {
             if(right < horBound) {
                 offset(DrawView.getGridSpacing(), 0);
+                if(this.paint.getColor() == Color.WHITE) {
+                    return 1;
+                }
             }
+            return -1;
         }
-        public void moveLeft() {
+        public int moveLeft() {
             if(left > 0) {
                 offset(-DrawView.getGridSpacing(), 0);
+                if(this.paint.getColor() == Color.WHITE) {
+                    return 1;
+                }
             }
+            return -1;
         }
-        public void moveUp() {
+        public int moveUp() {
             if(top > 0) {
                 offset(0, -DrawView.getGridSpacing());
+                if(this.paint.getColor() == Color.WHITE) {
+                    return 1;
+                }
             }
+            return -1;
         }
-        public void moveDown() {
+        public int moveDown() {
             if(bottom < vertBound) {
                 offset(0, DrawView.getGridSpacing());
+                if(this.paint.getColor() == Color.WHITE) {
+                    return 1;
+                }
             }
+            return -1;
         }
-
-
-
 
 
         public void setCoordinates(int leftX, int topY, int rightX, int bottomY) {
@@ -97,5 +90,13 @@ public class Sprite extends RectF {
         public void setVertBound(int newVertBound) {
             this.vertBound = newVertBound;
         }
+
+        public void setPaintColor(int c) {
+            this.paint.setColor(c);
+        }
+        public int getPaintColor() {
+            return this.paint.getColor();
+        }
+
 
 }

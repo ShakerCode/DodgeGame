@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     Button moveLeft;
@@ -24,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         moveUp = findViewById(R.id.UP);
         moveDown = findViewById(R.id.DOWN);
         drawView = findViewById(R.id.drawView);
-
-//        drawView.addBars();
 
         moveLeft.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 drawView.moveDown();
             }
         });
+
+
 
     }
 }
