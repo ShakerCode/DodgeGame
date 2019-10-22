@@ -14,7 +14,7 @@ public class Bar extends RectF {
 
     public Bar(int x1, int y1, int length1, int color) {
         super(x1, y1, x1, y1 + length1);
-        this.dx = -3;
+        this.dx = -5;
         barpaint.setColor(color);
         barpaint.setStrokeWidth(8);
     }

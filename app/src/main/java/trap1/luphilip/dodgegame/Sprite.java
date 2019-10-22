@@ -13,7 +13,7 @@ public class Sprite extends RectF {
         private int horBound;
         private int vertBound;
         private Paint paint = new Paint();
-//        private boolean canMove;
+        private boolean canMove;
 
         public Sprite(int left, int top, int right, int bottom) {
             super(left, top, right, bottom);
@@ -38,38 +38,46 @@ public class Sprite extends RectF {
         public int moveRight() {
             if(right < horBound) {
                 offset(DrawView.getGridSpacing(), 0);
-                if(this.paint.getColor() == Color.WHITE) {
+                if(canMove) {
                     return 1;
+                } else {
+                    return -1;
                 }
             }
-            return -1;
+            return 0;
         }
         public int moveLeft() {
             if(left > 0) {
                 offset(-DrawView.getGridSpacing(), 0);
-                if(this.paint.getColor() == Color.WHITE) {
+                if(canMove) {
                     return 1;
+                } else {
+                    return -1;
                 }
             }
-            return -1;
+            return 0;
         }
         public int moveUp() {
             if(top > 0) {
                 offset(0, -DrawView.getGridSpacing());
-                if(this.paint.getColor() == Color.WHITE) {
+                if(canMove) {
                     return 1;
+                } else {
+                    return -1;
                 }
             }
-            return -1;
+            return 0;
         }
         public int moveDown() {
             if(bottom < vertBound) {
                 offset(0, DrawView.getGridSpacing());
-                if(this.paint.getColor() == Color.WHITE) {
+                if(canMove) {
                     return 1;
+                } else {
+                    return -1;
                 }
             }
-            return -1;
+            return 0;
         }
 
 
@@ -96,6 +104,9 @@ public class Sprite extends RectF {
         }
         public int getPaintColor() {
             return this.paint.getColor();
+        }
+        public void setCanMove(boolean b) {
+            canMove = b;
         }
 
 

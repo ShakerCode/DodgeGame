@@ -38,7 +38,7 @@ public class DrawView extends View {
 
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(8);
-        paint.setTextSize(30);
+        paint.setTextSize(80);
         int height = getHeight();
         int width = getWidth();
         gridSize = 6;
@@ -47,8 +47,8 @@ public class DrawView extends View {
 
         //Set up
         if (first) {
-            checker.setCoordinates(gridSpacing * 3 - gridSpacing / 2 + 30, boardSize + 130,
-                    gridSpacing * 3 + gridSpacing / 2 - 30, boardSize + 130 + gridSpacing / 2 - 30);
+            checker.setCoordinates(gridSpacing * 3 - gridSpacing / 2 + 60, boardSize + 130,
+                    gridSpacing * 3 + gridSpacing / 2 - 60, boardSize + 130 + gridSpacing / 2 - 60);
             ball.setCoordinates(x, y, gridSpacing, gridSpacing);
             addBars();
             ball.setHorBound(boardSize);
@@ -74,17 +74,17 @@ public class DrawView extends View {
         for(Bar b: bars) {
             if(RectF.intersects(checker, b)) {
                 checker.setPaintColor(Color.WHITE);
-//                checker.setCanMove(true);
+                ball.setCanMove(true);
                 break;
             } else {
                 checker.setPaintColor(Color.BLACK);
-//                checker.setCanMove(false);
+                ball.setCanMove(false);
             }
         }
-        System.out.println(ball.getPaintColor());
+//        System.out.println(ball.getPaintColor());
         checker.drawBall(canvas);
         ball.drawBall(canvas);
-        canvas.drawText("Score: " + score, 750, 1000, paint);
+        canvas.drawText("Score: " + score,920, 2050, paint);
         invalidate();
     }
 
