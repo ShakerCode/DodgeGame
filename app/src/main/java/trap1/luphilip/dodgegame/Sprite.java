@@ -15,11 +15,11 @@ public class Sprite extends RectF {
         private Paint paint = new Paint();
         private boolean canMove;
 
-        public Sprite(int left, int top, int right, int bottom) {
+        public Sprite(int left, int top, int right, int bottom, int c) {
             super(left, top, right, bottom);
             this.dx = 50;
             this.dy = 50;
-            this.paint.setColor(Color.BLUE);
+            this.paint.setColor(c);
 
         }
 
@@ -33,6 +33,32 @@ public class Sprite extends RectF {
 
         public void drawBall(Canvas canvas) {
                 canvas.drawCircle(centerX(), centerY(), width() / 2, this.paint);
+        }
+
+        public void randomMove() {
+            int randomNum = (int)(Math.random() * 4) + 1;
+//            System.out.println(randomNum);
+            switch(randomNum) {
+                case 1:
+                    if(right < horBound)
+                        offset(DrawView.getGridSpacing(),0);
+                    break;
+                case 2:
+                    if(left > 0)
+                        offset(-DrawView.getGridSpacing(), 0);
+                    break;
+                case 3:
+                    if(top > 0)
+                        offset(0, -DrawView.getGridSpacing());
+                    break;
+                case 4:
+                    if(bottom < vertBound)
+                        offset(0, DrawView.getGridSpacing());
+                    break;
+                default:
+                    offset(0,0);
+                    break;
+            }
         }
 
         public int moveRight() {
