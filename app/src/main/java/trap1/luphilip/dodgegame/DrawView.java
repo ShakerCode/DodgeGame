@@ -41,7 +41,7 @@ public class DrawView extends View {
         paint.setTextSize(80);
         int height = getHeight();
         int width = getWidth();
-        gridSize = 2;
+        gridSize = 6;
         gridSpacing = Math.min(width, height) / gridSize;
         boardSize = gridSize * gridSpacing;
 
