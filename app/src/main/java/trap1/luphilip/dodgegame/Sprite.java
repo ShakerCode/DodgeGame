@@ -35,29 +35,21 @@ public class Sprite extends RectF {
                 canvas.drawCircle(centerX(), centerY(), width() / 2, this.paint);
         }
 
+        //For obstacle
         public void randomMove() {
-            int randomNum = (int)(Math.random() * 4) + 1;
-//            System.out.println(randomNum);
+            int randomNum = (int)(Math.random() * 4);
             switch(randomNum) {
-                case 1:
+                case 1: //Add bounds here
                     if(right < horBound)
-                        offset(DrawView.getGridSpacing(),0);
-                    break;
-                case 2:
-                    if(left > 0)
                         offset(-DrawView.getGridSpacing(), 0);
-                    break;
+                case 2:
+                    offset(DrawView.getGridSpacing(), 0);
                 case 3:
-                    if(top > 0)
-                        offset(0, -DrawView.getGridSpacing());
-                    break;
+                    offset(0, -DrawView.getGridSpacing());
                 case 4:
-                    if(bottom < vertBound)
-                        offset(0, DrawView.getGridSpacing());
-                    break;
+                    offset(0, DrawView.getGridSpacing());
                 default:
                     offset(0,0);
-                    break;
             }
         }
 
@@ -131,9 +123,8 @@ public class Sprite extends RectF {
         public int getPaintColor() {
             return this.paint.getColor();
         }
-        public void setCanMove(boolean b) {
-            canMove = b;
-        }
 
-
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
 }

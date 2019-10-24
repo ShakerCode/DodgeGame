@@ -19,7 +19,7 @@ public class Bar extends RectF {
         barpaint.setStrokeWidth(8);
     }
 
-    public void drawBars(Canvas canvas, Sprite checker) {
+    public void drawBar(Canvas canvas) {
         canvas.drawLine(left, bottom, right, top, barpaint);
         offset(dx, 0);
         if(left <= 0) {
