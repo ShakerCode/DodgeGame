@@ -17,13 +17,12 @@ public class DrawView extends View {
     Sprite ball = new Sprite(Color.BLUE);
     Sprite checker = new Sprite(Color.BLACK);
     Paint paint = new Paint();
-    Paint barpaint = new Paint();
     ArrayList<Bar> bars = new ArrayList<Bar>();
     ArrayList<Sprite> obstacles = new ArrayList<Sprite>();
-    Sprite firstObstacle;
 
     private boolean first = true;
     private boolean addObst = true;
+    private boolean end = false;
     private static int gridSize = 0;
     private static int boardSize = 0;
     private static int gridSpacing = 0;
@@ -42,22 +41,20 @@ public class DrawView extends View {
         paint.setTextSize(80);
         int height = getHeight();
         int width = getWidth();
-        gridSize = 6;
+        gridSize = 2;
         gridSpacing = Math.min(width, height) / gridSize;
         boardSize = gridSize * gridSpacing;
 
         //Set up
         if (first) {
-            checker.setCoordinates(gridSpacing * 3 - gridSpacing / 2 + 60, boardSize + 140,
-                    gridSpacing * 3 + gridSpacing / 2 - 60, boardSize + 140 + gridSpacing / 2 - 60);
-            ball.setCoordinates(0,0, gridSpacing, gridSpacing);
+            //Radius of checker is gridSpacing/4.
+            //Spacing between bars and board is gridSpacing/2
+            checker.setCoordinates(getWidth() / 2 - gridSpacing / 4, boardSize + gridSpacing / 2 + gridSpacing / 4,
+                    getWidth() / 2 + gridSpacing / 4, boardSize + gridSpacing / 2 + gridSpacing / 4 + gridSpacing / 2);
+            ball.setCoordinates(0, 0, gridSpacing, gridSpacing);
             addBars();
-            firstObstacle = new Sprite(boardSize-gridSpacing,0,boardSize,gridSpacing, Color.RED);
-            firstObstacle.setHorBound(boardSize);
-            firstObstacle.setVertBound(boardSize);
             ball.setHorBound(boardSize);
             ball.setVertBound(boardSize);
-            obstacles.add(firstObstacle);
             first = false;
         }
 
@@ -68,8 +65,9 @@ public class DrawView extends View {
 
 
         // FIX
-        if(addObst && score >= 5 && score % 5 == 0) {
+        if (addObst) {
             addObstacle();
+            addObst = false;
         }
 
         //Horizontal
@@ -86,8 +84,9 @@ public class DrawView extends View {
         for (Bar b : bars) {
             b.drawBars(canvas, checker);
         }
-        for(Bar b: bars) {
-            if(RectF.intersects(checker, b)) {
+
+        for (Bar b : bars) {
+            if (RectF.intersects(checker, b)) {
                 checker.setPaintColor(Color.WHITE);
                 ball.setCanMove(true);
                 break;
@@ -98,40 +97,52 @@ public class DrawView extends View {
         }
 
         //Obstacles
-        for(Sprite s: obstacles) {
+        for (Sprite s : obstacles) {
             s.drawBall(canvas);
         }
 
-        canvas.drawText("Score: " + score,920, 2050, paint);
-        invalidate();
+        for(Sprite s: obstacles) {
+            if(RectF.intersects(ball, s)) {
+                end = true;
+                break;
+            }
+        }
+
+        if(end) {
+            canvas.drawText("Game Over! Score: " + score, 920, 2050, paint);
+        } else {
+            canvas.drawText("Score: " + score, 920, 2050, paint);
+            invalidate();
+        }
     }
 
     public void moveLeft() {
         score += ball.moveLeft();
+        checkAddObst();
         randomMove();
     }
 
     public void moveRight() {
         score += ball.moveRight();
+        checkAddObst();
         randomMove();
     }
 
     public void moveUp() {
         score += ball.moveUp();
+        checkAddObst();
         randomMove();
     }
 
     public void moveDown() {
         score += ball.moveDown();
+        checkAddObst();
         randomMove();
     }
 
     public void addBars() {
         for (int i = 0; i < gridSize; i++) {
-//            if(i != 3) {
-                bars.add(new Bar(i * gridSpacing, boardSize + 90, gridSpacing, Color.WHITE));
-//            }
-
+            bars.add(new Bar(i * gridSpacing, boardSize + gridSpacing / 2, gridSpacing, Color.WHITE));
         }
     }
 
@@ -149,16 +160,21 @@ public class DrawView extends View {
     }
 
     public void randomMove() {
-        for(Sprite s: obstacles) {
+        for (Sprite s : obstacles) {
             s.randomMove();
         }
     }
 
     public void addObstacle() {
-        Sprite newObstacle = new Sprite(boardSize-gridSpacing,0,boardSize,gridSpacing, Color.RED);
+        Sprite newObstacle = new Sprite(boardSize - gridSpacing, 0, boardSize, gridSpacing, Color.RED);
         newObstacle.setHorBound(boardSize);
         newObstacle.setVertBound(boardSize);
         obstacles.add(newObstacle);
+    }
+
+    public void checkAddObst() {
+        if (score >= 10 && score % 10 == 0)
+            addObst = true;
     }
 
 
