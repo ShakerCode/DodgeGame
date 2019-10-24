@@ -3,6 +3,7 @@ package trap1.luphilip.dodgegame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     Button moveRight;
     Button moveUp;
     Button moveDown;
+//    Button reset;
     DrawView drawView;
 
     @Override
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         moveUp = findViewById(R.id.UP);
         moveDown = findViewById(R.id.DOWN);
         drawView = findViewById(R.id.drawView);
+//        reset = findViewById(R.id.reset);
 
         moveLeft.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
                 drawView.moveDown();
             }
         });
+//        reset.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                drawView.draw(new Canvas());
+//            }
+//        });
 
 
 

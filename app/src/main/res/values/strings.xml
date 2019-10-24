@@ -5,4 +5,5 @@
     <string name="LEFT">LEFT</string>
     <string name="RIGHT">RIGHT</string>
     <string name="Score">Score: </string>
+    <string name="Reset">Reset</string>
 </resources>

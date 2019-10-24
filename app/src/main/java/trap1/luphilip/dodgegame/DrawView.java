@@ -38,15 +38,16 @@ public class DrawView extends View {
 
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(8);
-        paint.setTextSize(80);
         int height = getHeight();
         int width = getWidth();
         gridSize = 6;
         gridSpacing = Math.min(width, height) / gridSize;
         boardSize = gridSize * gridSpacing;
+        paint.setTextSize(50);
 
         //Set up
         if (first) {
+            System.out.println("here");
             //Radius of checker is gridSpacing/4.
             //Spacing between bars and board is gridSpacing/2
             checker.setCoordinates(getWidth() / 2 - gridSpacing / 4, boardSize + gridSpacing / 2 + gridSpacing / 4,
@@ -61,7 +62,7 @@ public class DrawView extends View {
         checker.drawBall(canvas);
         ball.drawBall(canvas);
 
-        System.out.println(obstacles);
+//        System.out.println(obstacles);
 
 
         // FIX
@@ -82,7 +83,7 @@ public class DrawView extends View {
         //Bars
 
         for (Bar b : bars) {
-            b.drawBars(canvas, checker);
+            b.drawBar(canvas);
         }
 
         for (Bar b : bars) {
@@ -109,11 +110,14 @@ public class DrawView extends View {
         }
 
         if(end) {
-            canvas.drawText("Game Over! Score: " + score, 920, 2050, paint);
+            canvas.drawText("Game Over!", getWidth() - 400, getHeight() - 350, paint);
+            canvas.drawText("Score: " + score, getWidth() - 400, getHeight() - 300, paint);
         } else {
-            canvas.drawText("Score: " + score, 920, 2050, paint);
+            canvas.drawText("Score: " + score, getWidth() - 400, getHeight() - 300, paint);
             invalidate();
+
         }
+
     }
 
     public void moveLeft() {
@@ -173,7 +177,7 @@ public class DrawView extends View {
     }
 
     public void checkAddObst() {
-        if (score >= 10 && score % 10 == 0)
+        if (score >= 5 && score % 5 == 0)
             addObst = true;
     }
 
