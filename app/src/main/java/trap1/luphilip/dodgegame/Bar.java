@@ -26,8 +26,10 @@ public class Bar extends RectF {
             left = canvas.getWidth();
             right = canvas.getWidth();
         }
+    }
 
-
+    public void setPaintColor(int c) {
+        this.barpaint.setColor(c);
     }
 
 

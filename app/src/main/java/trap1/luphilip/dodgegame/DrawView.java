@@ -88,11 +88,11 @@ public class DrawView extends View {
 
         for (Bar b : bars) {
             if (RectF.intersects(checker, b)) {
-                checker.setPaintColor(Color.WHITE);
+                b.setPaintColor(Color.GREEN);
                 ball.setCanMove(true);
                 break;
             } else {
-                checker.setPaintColor(Color.BLACK);
+                b.setPaintColor(Color.WHITE);
                 ball.setCanMove(false);
             }
         }
